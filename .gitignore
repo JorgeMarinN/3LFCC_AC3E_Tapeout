@@ -2,3 +2,5 @@
 /precheck_results/
 */tmp
 */*/tmp
+# ignore ALL files in ANY directory named 'backup_files'
+backup_files/ 
