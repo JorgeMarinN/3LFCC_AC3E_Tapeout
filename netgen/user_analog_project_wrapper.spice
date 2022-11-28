@@ -1,5 +1,10 @@
 * NGSPICE file created from user_analog_project_wrapper.ext - technology: sky130A
 
+.subckt unit_cap c2_30_30# c1_30_30# m3_0_0#
+X0 c1_30_30# m3_0_0# sky130_fd_pr__cap_mim_m3_1 l=3e+07u w=3e+07u
+X1 c2_30_30# c1_30_30# sky130_fd_pr__cap_mim_m3_2 l=3e+07u w=3e+07u
+.ends
+
 .subckt stack_2um_1_5 m1_0_0#
 R0 m1_0_0# m1_0_0# sky130_fd_pr__res_generic_m1 w=800000u l=0u
 .ends
@@ -6200,11 +6205,6 @@ Xpmos_waffle_48x48_0 fc1 s2 out out pmos_waffle_48x48
 Xpmos_waffle_48x48_1 VP s1 fc1 fc1 pmos_waffle_48x48
 .ends
 
-.subckt unit_cap c2_30_30# c1_30_30# m3_0_0#
-X0 c1_30_30# m3_0_0# sky130_fd_pr__cap_mim_m3_1 l=3e+07u w=3e+07u
-X1 c2_30_30# c1_30_30# sky130_fd_pr__cap_mim_m3_2 l=3e+07u w=3e+07u
-.ends
-
 .subckt fc_pad m5_0_0#
 Xstack30um_1_5_19 m5_0_0# stack30um_1_5
 Xstack30um_1_5_18 m5_0_0# stack30um_1_5
@@ -8591,11 +8591,121 @@ Xstack30um_1_5_28 Vout2 stack30um_1_5
 Xstack30um_1_5_17 Vout1 stack30um_1_5
 .ends
 
-.subckt topmodule VLS2 VLS1 VH_4 FC2_1 VH_3 VH_2 D8 D7 D6 D5 D4 D3 D2 FC2_1b D1 FC2_2b
-+ GND_2 interleaved_0/Vout1 FC1_1 interleaved_0/VH FC1_2 FC2_2 interleaved_0/Vout2
-+ VDD FC1_1b FC1_2b VSUBS
+.subckt calibration_pad m5_0_0#
+Xstack30um_1_5_0 m5_0_0# stack30um_1_5
+.ends
+
+.subckt sky130_fd_pr__res_generic_po_KL3G6K a_n3000_n3540# a_n3000_3110#
+R0 a_n3000_n3540# a_n3000_3110# sky130_fd_pr__res_generic_po w=3e+07u l=3.11e+07u
+.ends
+
+.subckt calibration
+Xcalibration_pad_0 calibration_pad_0/m5_0_0# calibration_pad
+Xsky130_fd_pr__res_generic_po_KL3G6K_0 calibration_pad_0/m5_0_0# calibration_pad_1/m5_0_0#
++ sky130_fd_pr__res_generic_po_KL3G6K
+Xcalibration_pad_1 calibration_pad_1/m5_0_0# calibration_pad
+.ends
+
+.subckt inductors m3_0_80000# m3_0_123200# m3_0_36800# m3_0_15200# m3_1000_162000#
+Xcalibration_pad_0 m1_407000_47000# calibration_pad
+Xcalibration_pad_1 calibration_pad_1/m5_0_0# calibration_pad
+Xcalibration_1 calibration
+Xcalibration_0 calibration
+R0 m3_0_123200# m3_0_80000# sky130_fd_pr__res_generic_m3 w=5e+06u l=1e+06u
+R1 m3_0_36800# m3_0_15200# sky130_fd_pr__res_generic_m3 w=5e+06u l=1e+06u
+.ends
+
+.subckt topmodule inductors_0/m3_0_123200# VLS2 VLS1 VH_4 inductors_0/m3_1000_162000#
++ VH_3 FC2_1 VH_2 D8 D7 D6 D5 D4 D3 D2 inductors_0/m3_0_36800# FC2_1b D1 FC2_2b GND_2
++ interleaved_0/Vout1 inductors_0/m3_0_15200# FC1_1 interleaved_0/VH FC1_2 FC2_2 VDD
++ interleaved_0/Vout2 FC1_1b FC1_2b inductors_0/m3_0_80000# VSUBS
+Xunit_cap_73 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_62 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_51 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_40 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_74 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_63 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_52 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_41 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_30 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_75 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_64 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_53 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_42 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_20 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_31 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_76 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_65 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_54 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_21 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_32 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_43 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_10 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_77 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_66 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_55 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_23 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_22 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_34 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_33 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_12 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_44 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_11 VSUBS interleaved_0/VH VSUBS unit_cap
 Xinterleaved_0 VLS2 D8 D7 D6 D5 interleaved_0/VH VDD FC2_2 D4 D3 D2 D1 FC1_2 interleaved_0/Vout2
 + interleaved_0/Vout1 FC2_1 VLS1 FC1_1 VSUBS interleaved
+Xunit_cap_78 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_68 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_67 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_57 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_56 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_79 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_35 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_24 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_13 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_45 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_46 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_69 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_58 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_36 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_25 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_14 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_47 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_59 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_37 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_26 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_15 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_48 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_38 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_27 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_16 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_49 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_39 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_28 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_17 VSUBS interleaved_0/VH VSUBS unit_cap
+Xinductors_0 inductors_0/m3_0_80000# inductors_0/m3_0_123200# inductors_0/m3_0_36800#
++ inductors_0/m3_0_15200# inductors_0/m3_1000_162000# inductors
+Xunit_cap_18 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_29 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_19 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_0 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_1 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_2 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_3 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_4 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_5 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_6 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_7 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_8 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_9 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_70 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_81 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_80 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_71 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_82 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_60 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_72 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_61 VSUBS interleaved_0/VH VSUBS unit_cap
+Xunit_cap_50 VSUBS interleaved_0/VH VSUBS unit_cap
 R0 interleaved_0/VH VH_2 sky130_fd_pr__res_generic_m3 w=2.6e+07u l=500000u
 R1 VSUBS GND_2 sky130_fd_pr__res_generic_m3 w=8e+07u l=500000u
 R2 FC1_2b FC1_2 sky130_fd_pr__res_generic_m3 w=5e+06u l=5e+06u
@@ -8712,9 +8822,10 @@ R7 FC2_2 FC2_2b sky130_fd_pr__res_generic_m3 w=5e+06u l=5e+06u
 + wbs_dat_o[30] wbs_dat_o[31] wbs_dat_o[3] wbs_dat_o[4] wbs_dat_o[5] wbs_dat_o[6]
 + wbs_dat_o[7] wbs_dat_o[8] wbs_dat_o[9] wbs_sel_i[0] wbs_sel_i[1] wbs_sel_i[2] wbs_sel_i[3]
 + wbs_stb_i wbs_we_i
-Xtopmodule_0 vdda1 vdda2 io_analog[2] io_analog[1] io_analog[3] io_analog[7] io_in[10]
-+ io_in[9] io_in[8] io_in[7] io_in[17] io_in[18] io_in[19] gpio_noesd[6] io_in[20]
-+ gpio_noesd[5] vssa1 io_analog[6] io_analog[9] io_analog[8] io_analog[10] io_analog[0]
-+ io_analog[4] vccd1 gpio_noesd[7] gpio_noesd[9] io_analog[5] topmodule
+Xtopmodule_0 gpio_noesd[14] vdda1 vdda2 io_analog[2] vssd2 io_analog[3] io_analog[1]
++ io_analog[7] io_in[10] io_in[9] io_in[8] io_in[7] io_in[17] io_in[18] io_in[19]
++ gpio_noesd[16] gpio_noesd[6] io_in[20] gpio_noesd[5] vssa1 io_analog[6] gpio_noesd[17]
++ io_analog[9] io_analog[8] io_analog[10] io_analog[0] vccd1 io_analog[4] gpio_noesd[7]
++ gpio_noesd[9] gpio_noesd[15] io_analog[5] topmodule
 .ends
 
